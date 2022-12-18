@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block page_content %}
+{% for user in users %}
+    <div class="row justify-content-center">
+        <div class="d-flex">
+            <div class="d-inline p-2 w-50">
+                <img src="{{ user.profile.picture }}"
+                     class="w-50 rounded mx-auto d-block" alt="description">
+            </div>
+            <div class="d-inline p-2 w-50">
+                <div class="d-flex flex-column">
+                    <h5>{{ user }}</h5>
+
+                    <h5><u>Name:</u> {{ user.profile.first_name }} {{ user.profile.last_name }}</h5>
+                    <h5><u>Profile ID: </u>{{ user.profile.id }}</h5>
+                    <!-- If Date of Birth -->
+                    {% if user.profile.date_of_birth %}
+                        <h5><u>Birthdate:</u> {{ user.profile.date_of_birth }}</h5>
+                    {% endif %}
+                    <!-- If Email -->
+                    {% if user.profile.email %}
+                        <h5><u>Email:</u> {{ user.profile.email }}</h5>
+                    {% endif %}
+                    <!-- If Gender is Chosen -->
+                    {% if user.profile.gender %}
+                        <h5><u>Gender:</u> {{ user.profile.gender }}</h5>
+                    {% endif %}
+                    <!-- If Description -->
+                    {% if user.profile.description %}
+                        <h5><u>Description:</u> {{ user.profile.description}}</h5>
+                    {% endif %}
+                </div>
+{#                    {% with user.account_owner_photo.all %}#}
+{##}
+{#                    {% endwith %}#}
+                <p class="mt-2">Total Images: {{ user.account_owner_photo.all|length }}</p>
+                <p class="mt-2">Total Likes:  {{ user.profile.total_likes }} </p>
+
+            </div>
+        </div>
+    </div>
+        <!-- Pets Information -->
+    <h2 class="text-center">My Pets</h2>
+    <div class="container mb-4">
+        <div class="d-flex justify-content-start mb-5">
+            {% for pet in pets %}
+            <div style="width: 18rem;">
+                <h5>{{ pet.name }}</h5>
+                <p class="mt-2">Age: {{ pet.age }}</p>
+                <a href="{% url 'pet_edit' pet.pk %}" class="btn btn-primary">Edit</a>
+                <a href="{% url 'pet_delete' pet.pk %}" class="btn btn-danger">Delete</a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endfor %}
+
+{% endblock %}
