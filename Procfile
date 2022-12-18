@@ -1,0 +1,1 @@
+web: gunicorn Petstagram_Railway.wsgi
