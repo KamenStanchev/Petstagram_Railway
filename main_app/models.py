@@ -53,7 +53,6 @@ class Profile(models.Model):
         on_delete=models.CASCADE,
     )
 
-
     @property
     def total_likes(self):
         result = 0
@@ -65,7 +64,6 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.first_name
-
 
 
 class Pet(models.Model):
@@ -99,7 +97,7 @@ class Pet(models.Model):
 class PetPhoto(models.Model):
     photo = models.ImageField(
         'Pet image',
-        upload_to='images/',
+        upload_to='pet_photos/',
 
     )
     tagged_pets = models.ManyToManyField(Pet)
